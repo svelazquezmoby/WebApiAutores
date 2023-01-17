@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
+using WebApiAut.Filters;
 
 namespace WebApiAut
 {
@@ -25,21 +27,24 @@ namespace WebApiAut
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            //autenticacion
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+            services.AddTransient<FiltroAccion>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment())//en produccion
+            {  //middlewares
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
-            //middlewares
+            //middlewares en desarrollo
             app.UseHttpsRedirection();
             app.UseRouting();   
 
-            app.UseAuthorization();
+            app.UseAuthorization(); //el orden importa
 
             app.UseEndpoints(endpoints =>
             {

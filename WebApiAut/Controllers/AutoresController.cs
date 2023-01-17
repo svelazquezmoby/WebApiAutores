@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApiAut.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using WebApiAut.Filters;
 
 namespace WebApiAut.Controllers
 {
@@ -19,6 +21,8 @@ namespace WebApiAut.Controllers
         }
 
         [HttpGet]//atributos
+        [Authorize]
+        [ServiceFilter(typeof(FiltroAccion))]
         public async Task<ActionResult<List<Autor>>> Get()
         {
             return await dbContext.Autores.Include(x => x.Libros).ToListAsync();
