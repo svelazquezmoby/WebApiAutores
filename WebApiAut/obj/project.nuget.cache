@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "4t+fXGhGlXo5+8UqOLJ/r/CuX4LjEa0yxcN1XZBXuextDCpooSo3lqI4DdAT3fLHxDkR6PyV+piMd8dVtKa8FQ==",
+  "dgSpecHash": "/LaksaWeVGOOg9aZOupIkTH3yFyfdI7kZ5gJTGg2SQyvXhpoNV0gFNAYVqbhc92MfEAeb4d649x+ZhKTvHrgVQ==",
   "success": true,
   "projectFilePath": "D:\\Proyectos\\WebApiAut\\WebApiAut\\WebApiAut.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Gian\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\Gian\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Gian\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Gian\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Gian\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

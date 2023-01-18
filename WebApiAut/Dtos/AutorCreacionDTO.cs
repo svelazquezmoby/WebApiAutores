@@ -1,18 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using WebApiAut.Validations;
 
-namespace WebApiAut.Entities
+namespace WebApiAut.Dtos
 {
-    public class Autor
-    {
-        public int Id { get; set; }
+    public class AutorCreacionDTO
+    {   //post
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(maximumLength: 10, ErrorMessage = "{0} no debe tener mas de {1} caracteres")]
         [Mayuscula]
         public string Nombre { get; set; }
-
-        // public List<Libro> Libros { get; set; } cargar libros
-
     }
 }
