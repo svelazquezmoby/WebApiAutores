@@ -24,7 +24,7 @@ namespace WebApiAut.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<LibroDTO>> Get(int id)
         {
-            var libro =  await dbContext.Libros.FirstOrDefaultAsync(x => x.Id == id);//query 
+            var libro =  await dbContext.Libros.Include(librobd => librobd.Comentarios).FirstOrDefaultAsync(x => x.Id == id);//query JOIN
             return mapper.Map<LibroDTO>(libro);
         }
         [HttpPost]
@@ -35,6 +35,15 @@ namespace WebApiAut.Controllers
              {
                  return BadRequest("No existe autor con esa id");
              }*/
+            if (libroCreacionDTO.AutoresIds == null)
+            {
+                return BadRequest("Primero debe crear un autor");
+            }
+            var autoresids = await dbContext.Autores.Where(autorbd => libroCreacionDTO.AutoresIds.Contains(autorbd.Id)).Select(x=> x.Id).ToListAsync();//ir a la tabla de autores donde id del autor sea igual al que te pase y traeme solo el id 
+            if (libroCreacionDTO.AutoresIds.Count != autoresids.Count)
+            {
+                return BadRequest("No existe autor");
+            }
             var libro = mapper.Map<Libro>(libroCreacionDTO);
 
             dbContext.Add(libro);

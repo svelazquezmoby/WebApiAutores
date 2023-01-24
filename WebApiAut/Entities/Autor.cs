@@ -11,6 +11,7 @@ namespace WebApiAut.Entities
         [StringLength(maximumLength: 10, ErrorMessage = "{0} no debe tener mas de {1} caracteres")]
         [Mayuscula]
         public string Nombre { get; set; }
+        public List<AutorLibro> AutoresLibros { get; set; }//desde autor puedo acceder a libros
 
         // public List<Libro> Libros { get; set; } cargar libros
 

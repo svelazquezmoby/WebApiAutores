@@ -13,7 +13,7 @@ namespace WebApiAut.Entities
         [StringLength(maximumLength: 50, ErrorMessage = "{0} no debe tener mas de {1} caracteres")]
         public string Titulo { get; set; }
         public List<Comentario> Comentarios { get; set; } //join 
-
+        public List<AutorLibro> AutoresLibros { get; set; }//desde libros accedo al listado de autores
         //public int AutorId { get; set; }
 
         //public Autor Autor { get; set; }

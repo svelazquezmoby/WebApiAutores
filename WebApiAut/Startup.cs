@@ -27,11 +27,12 @@ namespace WebApiAut
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddAutoMapper(typeof(Startup));
             //autenticacion
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             services.AddTransient<FiltroAccion>();
             //automapper
-            services.AddAutoMapper(typeof(Startup));
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

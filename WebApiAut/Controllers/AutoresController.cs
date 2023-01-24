@@ -21,7 +21,7 @@ namespace WebApiAut.Controllers
 
         public AutoresController(ApplicationDbContext dbContext, IMapper mapper)
          {
-             this.dbContext = dbContext;
+            this.dbContext = dbContext;
             this.mapper = mapper;
         }
 

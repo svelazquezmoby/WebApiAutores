@@ -39,6 +39,24 @@ namespace WebApiAut.Migrations
                     b.ToTable("Autores");
                 });
 
+            modelBuilder.Entity("WebApiAut.Entities.AutorLibro", b =>
+                {
+                    b.Property<int>("AutorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Orden")
+                        .HasColumnType("int");
+
+                    b.HasKey("AutorId", "LibroId");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("AutoresLibros");
+                });
+
             modelBuilder.Entity("WebApiAut.Entities.Comentario", b =>
                 {
                     b.Property<int>("Id")
@@ -78,19 +96,45 @@ namespace WebApiAut.Migrations
                     b.ToTable("Libros");
                 });
 
+            modelBuilder.Entity("WebApiAut.Entities.AutorLibro", b =>
+                {
+                    b.HasOne("WebApiAut.Entities.Autor", "Autor")
+                        .WithMany("AutoresLibros")
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApiAut.Entities.Libro", "Libro")
+                        .WithMany("AutoresLibros")
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Libro");
+                });
+
             modelBuilder.Entity("WebApiAut.Entities.Comentario", b =>
                 {
-                    b.HasOne("WebApiAut.Entities.Libro", "libro")
+                    b.HasOne("WebApiAut.Entities.Libro", "Libro")
                         .WithMany("Comentarios")
                         .HasForeignKey("LibroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("libro");
+                    b.Navigation("Libro");
+                });
+
+            modelBuilder.Entity("WebApiAut.Entities.Autor", b =>
+                {
+                    b.Navigation("AutoresLibros");
                 });
 
             modelBuilder.Entity("WebApiAut.Entities.Libro", b =>
                 {
+                    b.Navigation("AutoresLibros");
+
                     b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618

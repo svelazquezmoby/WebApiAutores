@@ -11,8 +11,8 @@ using WebApiAut;
 namespace WebApiAut.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230118010650_Foo")]
-    partial class Foo
+    [Migration("20230118174029_comentarios")]
+    partial class comentarios
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,27 @@ namespace WebApiAut.Migrations
                     b.ToTable("Autores");
                 });
 
+            modelBuilder.Entity("WebApiAut.Entities.Comentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("Comentarios");
+                });
+
             modelBuilder.Entity("WebApiAut.Entities.Libro", b =>
                 {
                     b.Property<int>("Id")
@@ -52,12 +73,28 @@ namespace WebApiAut.Migrations
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Libros");
+                });
+
+            modelBuilder.Entity("WebApiAut.Entities.Comentario", b =>
+                {
+                    b.HasOne("WebApiAut.Entities.Libro", "Libro")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Libro");
+                });
+
+            modelBuilder.Entity("WebApiAut.Entities.Libro", b =>
+                {
+                    b.Navigation("Comentarios");
                 });
 #pragma warning restore 612, 618
         }

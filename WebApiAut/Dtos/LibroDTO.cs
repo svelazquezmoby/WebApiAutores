@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using WebApiAut.Validations;
 
 namespace WebApiAut.Dtos
@@ -8,5 +9,6 @@ namespace WebApiAut.Dtos
         public int Id { get; set; }     
         public string Titulo { get; set; }
 
+        public List<ComentarioDTO> Comentarios { get; set; }
     }
 }
